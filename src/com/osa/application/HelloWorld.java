@@ -10,7 +10,12 @@ public class HelloWorld {
 		System.out.println("Hello World!");
 		System.out.println("California knows how to party!");
 		System.out.println("In the city...city of Compton!!");
+		System.out.println(getMessage());
 
+	}
+	
+	public static String getMessage() {
+		return "We keep it rockin!";
 	}
 
 }

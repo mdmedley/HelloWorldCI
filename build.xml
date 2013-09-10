@@ -7,11 +7,17 @@
 <project basedir="." default="build" name="HelloWorldCI">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../../../../Applications/core-spring-3.2.b.RELEASE/sts-3.2.0.M1"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.7"/>
     <property name="source" value="1.7"/>
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
+        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+    </path>
     <path id="HelloWorldCI.classpath">
         <pathelement location="bin"/>
+        <path refid="JUnit 4.libraryclasspath"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -52,5 +58,21 @@
         <java classname="com.osa.application.HelloWorld" failonerror="true" fork="yes">
             <classpath refid="HelloWorldCI.classpath"/>
         </java>
+    </target>
+    <target name="HelloWorldTest">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.osa.application.HelloWorldTest" todir="${junit.output.dir}"/>
+            <classpath refid="HelloWorldCI.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>
