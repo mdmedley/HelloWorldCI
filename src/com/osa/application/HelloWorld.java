@@ -9,7 +9,7 @@ public class HelloWorld {
 		// TODO Auto-generated method stub
 		System.out.println("Hello World!");
 		System.out.println("California knows how to party!");
-		System.out.println("In the city...city of Compton!");
+		System.out.println("In the city...city of Compton!!");
 
 	}
 
